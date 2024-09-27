@@ -8,9 +8,64 @@
 .world-container {
     text-align: center;
     padding: 20px;
+    background-color: #99DFEC;
   }
 
   h1 {
     text-transform: uppercase;
     font-weight: 800;
+    margin-bottom: 40px;
+    color: white;
+    font-size: 48px;
   }
+
+  .countries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .country-card {
+    padding: 10px;
+    border-radius: 16px;
+    background: white;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    transition: 0.5s ease-in-out;
+  }
+
+  .country-card:hover {
+    transform: scale(1.05);
+  }
+
+  .flagContainer {
+    height:100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .country-flag {
+    width:80px;
+    height: auto;
+    border-radius: 6px;
+  }
+
+  .nameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: medium;
+    font-weight: 400;
+    color: #23346C;
+  }
+
+  

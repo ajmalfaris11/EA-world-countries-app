@@ -27,14 +27,14 @@ const App = () => {
       <div className="countries-grid">
         {countries.map((country) => (
           <div key={country.cca3} className="country-card">
-            <div>
+            <div className="flagContainer">
               <img
                 src={country.flags.svg}
                 alt={`Flag of ${country.name.common}`}
                 className="country-flag"
               />
             </div>
-            <div>
+            <div className="nameContainer">
               <h2>{country.name.common}</h2>
             </div>
           </div>
