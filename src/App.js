@@ -3,10 +3,8 @@ import axios from "axios";
 import "./App.css";
 
 const App = () => {
-  // update the countries values
   const [countries, setCountries] = useState([]);
 
-  // fetch the data while loading the app with help of useEffect hook
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -20,17 +18,26 @@ const App = () => {
     fetchCountries();
   }, []);
 
+  // Function to speak the country's name
+  const speakCountryName = (countryName) => {
+    const utterance = new SpeechSynthesisUtterance(countryName);
+    speechSynthesis.speak(utterance);
+  };
+
   return (
     <div className="world-container">
-      {/* header */}
       <h1>Countries of the World</h1>
       <div className="countries-grid">
         {countries.map((country) => (
-          <div key={country.cca3} className="country-card">
+          <div
+            key={country.cca3}
+            className="country-card"
+            onClick={() => speakCountryName(country.name.common)}
+          >
             <div className="flagContainer">
               <img
                 src={country.flags.svg}
-                alt={`Flag of ${country.name.common}`}
+                alt={country.name.common}
                 className="country-flag"
               />
             </div>
