@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './App.css'
+import "./App.css";
 
 const App = () => {
   // update the countries values
@@ -20,11 +20,28 @@ const App = () => {
     fetchCountries();
   }, []);
 
-  return <div className="world-container">
-    {/* header */}
-    <h1>Countries of the world</h1>
-
-  </div>;
+  return (
+    <div className="world-container">
+      {/* header */}
+      <h1>Countries of the World</h1>
+      <div className="countries-grid">
+        {countries.map((country) => (
+          <div key={country.cca3} className="country-card">
+            <div>
+              <img
+                src={country.flags.svg}
+                alt={`Flag of ${country.name.common}`}
+                className="country-flag"
+              />
+            </div>
+            <div>
+              <h2>{country.name.common}</h2>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default App;
