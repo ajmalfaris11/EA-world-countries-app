@@ -8,39 +8,46 @@ const App = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       try {
-        const response = await axios.get("https://restcountries.com/v3.1/all");
-        setCountries(response.data);
-      } catch (error) {
-        console.error("Error fetching countries:", error);
+        // Stable API
+        const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,flags,cca3");
+        const sorted = res.data.sort((a, b) =>
+          a.name.common.localeCompare(b.name.common)
+        );
+        setCountries(sorted);
+      } catch (err) {
+        console.error("Failed to fetch countries:", err);
       }
     };
 
     fetchCountries();
   }, []);
 
-  // Function to speak the country's name
-  const speakCountryName = (countryName) => {
-    const utterance = new SpeechSynthesisUtterance(countryName);
-    speechSynthesis.speak(utterance);
+  const speakCountry = (name) => {
+    const utter = new SpeechSynthesisUtterance(name);
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utter);
   };
 
   return (
     <div className="world-container">
-      <h1>Countries of the World</h1>
+      <h1 className="title">🌍 Countries of the World</h1>
+
       <div className="countries-grid">
         {countries.map((country) => (
           <div
             key={country.cca3}
             className="country-card"
-            onClick={() => speakCountryName(country.name.common)}
+            onClick={() => speakCountry(country.name.common)}
           >
             <div className="flagContainer">
               <img
-                src={country.flags.svg}
+                src={country.flags.png}
                 alt={country.name.common}
+                loading="lazy"
                 className="country-flag"
               />
             </div>
+
             <div className="nameContainer">
               <h2>{country.name.common}</h2>
             </div>
